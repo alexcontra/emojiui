@@ -1,3 +1,4 @@
+import 'package:emojiui/foodtabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,14 @@ class DashboardPage extends StatefulWidget {
   _DashboardPageState createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage>
+    with SingleTickerProviderStateMixin {
+  TabController tabController;
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 4, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,6 +117,39 @@ class _DashboardPageState extends State<DashboardPage> {
                     Color(0xFFC2E3FE), Color(0xFF6A8CAA)),
                 _buildListItem('Donuts', 'assets/doughnut.png', '15',
                     Color(0xFFD7FADA), Color(0xFF56CC7E))
+              ],
+            ),
+          ),
+          SizedBox(height: 10.0),
+          Padding(
+            padding: EdgeInsets.only(left: 15.0),
+            child: TabBar(
+                controller: tabController,
+                isScrollable: true,
+                indicatorColor: Colors.transparent,
+                unselectedLabelColor: Colors.grey.withOpacity(0.5),
+                labelStyle: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w700,
+                ),
+                unselectedLabelStyle:
+                    TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500),
+                tabs: [
+                  Tab(child: Text('FEATURED')),
+                  Tab(child: Text('COBMO')),
+                  Tab(child: Text('FAVORITES')),
+                  Tab(child: Text('RECOMMENDED'))
+                ]),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height - 450.0,
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                FoodTab(),
+                FoodTab(),
+                FoodTab(),
+                FoodTab(),
               ],
             ),
           ),
