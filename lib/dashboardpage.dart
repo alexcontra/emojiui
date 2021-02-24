@@ -2,6 +2,8 @@ import 'package:emojiui/foodtabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'burgerpage.dart';
+
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -164,7 +166,15 @@ class _DashboardPageState extends State<DashboardPage>
     return Padding(
       padding: EdgeInsets.only(left: 15.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => BurgerPage(
+                heroTag: foodname,
+                foodname: foodname,
+                pricePerItem: price,
+                imgPath: imgPath),
+          ));
+        },
         child: Container(
             height: 175.0,
             width: 150.0,
