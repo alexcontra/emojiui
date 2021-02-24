@@ -14,6 +14,7 @@ class _FoodTabState extends State<FoodTab> {
       body: ListView(
         children: [
           _buildListItem('Delicious hot dog', 4.0, '6', 'assets/hotdog.png'),
+          _buildListItem('Chesse pizza', 5.0, '12', 'assets/pizza.png'),
         ],
       ),
     );
@@ -26,17 +27,17 @@ class _FoodTabState extends State<FoodTab> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            width: 120.0,
+            width: 200.0,
             child: Row(
               children: [
                 Container(
                   height: 75.0,
-                  width: 75.0,
+                  width: 71.0,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7.0),
                       color: Color(0xFFFFE3DF)),
                   child: Center(
-                      child: Image.asset(imgPath, height: 50.0, width: 60.0)),
+                      child: Image.asset(imgPath, height: 70.0, width: 60.0)),
                 ),
                 SizedBox(width: 20.0),
                 Column(

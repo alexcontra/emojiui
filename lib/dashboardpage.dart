@@ -134,6 +134,7 @@ class _DashboardPageState extends State<DashboardPage>
                 ),
                 unselectedLabelStyle:
                     TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500),
+                labelColor: Colors.black,
                 tabs: [
                   Tab(child: Text('FEATURED')),
                   Tab(child: Text('COBMO')),
