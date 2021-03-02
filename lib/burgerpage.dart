@@ -9,6 +9,8 @@ class BurgerPage extends StatefulWidget {
 }
 
 class _BurgerPageState extends State<BurgerPage> {
+  var netPrice = 0.0;
+  var quantity = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +136,119 @@ class _BurgerPageState extends State<BurgerPage> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                        height: 45.0,
+                        width: 40.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xFFFE7D6A).withOpacity(0.1),
+                                blurRadius: 6.0,
+                                spreadRadius: 6.0,
+                                offset: Offset(5.0, 11.0),
+                              ),
+                            ]),
+                      ),
+                      Container(
+                        height: 50.0,
+                        width: 50.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.restore,
+                            color: Color(0xFFFE7D6A),
+                            size: 25.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: 70.0,
+                width: 125.0,
+                color: Colors.white,
+                child: Center(
+                  child: Text(
+                    '\$' +
+                        (int.parse(widget.pricePerItem) + quantity).toString(),
+                    style: TextStyle(
+                      fontSize: 40.0,
+                      color: Color(0xFF5E6166),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 60.0,
+                width: 225.0,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFE7D6A),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.0),
+                    bottomLeft: Radius.circular(10.0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      height: 40.0,
+                      width: 105.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            iconSize: 17.0,
+                            icon: Icon(
+                              Icons.remove,
+                              color: Color(0xFFFE7D6A),
+                            ),
+                            onPressed: () {},
+                          ),
+                          IconButton(
+                            iconSize: 17.0,
+                            icon: Icon(
+                              Icons.add,
+                              color: Color(0xFFFE7D6A),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      'Add to cart',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
