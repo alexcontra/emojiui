@@ -189,7 +189,7 @@ class _BurgerPageState extends State<BurgerPage> {
                 child: Center(
                   child: Text(
                     '\$' +
-                        (int.parse(widget.pricePerItem) + quantity).toString(),
+                        (int.parse(widget.pricePerItem) * quantity).toString(),
                     style: TextStyle(
                       fontSize: 40.0,
                       color: Color(0xFF5E6166),
@@ -226,7 +226,17 @@ class _BurgerPageState extends State<BurgerPage> {
                               Icons.remove,
                               color: Color(0xFFFE7D6A),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              _adjustQuantity('MINUS');
+                            },
+                          ),
+                          Text(
+                            quantity.toString(),
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Color(0xFFFE7D6A),
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                           IconButton(
                             iconSize: 17.0,
@@ -234,7 +244,9 @@ class _BurgerPageState extends State<BurgerPage> {
                               Icons.add,
                               color: Color(0xFFFE7D6A),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              _adjustQuantity('PLUS');
+                            },
                           ),
                         ],
                       ),
@@ -252,8 +264,116 @@ class _BurgerPageState extends State<BurgerPage> {
               ),
             ],
           ),
+          Container(
+            height: 225.0,
+            width: MediaQuery.of(context).size.width,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[_buildListItem('1'), _buildListItem('2')],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  _buildListItem(String columnNumber) {
+    return Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          if (columnNumber == '1')
+            _buildColumnItem(
+                'assets/cheese.png', 'Sweet chesse', '11', Color(0xFFFBD6F5)),
+          Padding(
+            padding: EdgeInsets.only(
+              bottom: 5.0,
+            ),
+          ),
+          if (columnNumber == '1')
+            _buildColumnItem(
+                'assets/popcorn.png', 'Sweet popcorn', '11', Color(0xFFFBD6F5)),
+          if (columnNumber == '2')
+            _buildColumnItem(
+                'assets/taco.png', 'Tacos', '8', Color(0xFFFBD6F5)),
+          Padding(
+            padding: EdgeInsets.only(
+              bottom: 5.0,
+            ),
+          ),
+          if (columnNumber == '2')
+            _buildColumnItem(
+                'assets/sandwich.png', 'Sandwich', '9', Color(0xFFFBD6F5)),
+        ],
+      ),
+    );
+  }
+
+  _buildColumnItem(String imgpath, String name, String price, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: 210.0,
+          child: Row(
+            children: [
+              Container(
+                height: 75.0,
+                width: 75.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7.0),
+                  color: color,
+                ),
+                child: Center(
+                  child: Image.asset(
+                    imgpath,
+                    height: 50.0,
+                    width: 50.0,
+                  ),
+                ),
+              ),
+              SizedBox(width: 10.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFD6534),
+                    ),
+                  ),
+                  Text(
+                    '\$' + price,
+                    style: TextStyle(
+                      fontSize: 19.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  _adjustQuantity(pressed) {
+    switch (pressed) {
+      case 'MINUS':
+        setState(() {
+          if (quantity > 1) {
+            quantity -= 1;
+          }
+        });
+        break;
+      case 'PLUS':
+        setState(() {
+          quantity += 1;
+        });
+        break;
+    }
   }
 }
